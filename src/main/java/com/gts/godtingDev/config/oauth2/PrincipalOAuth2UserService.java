@@ -1,5 +1,7 @@
 package com.gts.godtingDev.config.oauth2;
 
+import com.gts.godtingDev.config.exception.CustomException;
+import com.gts.godtingDev.config.exception.ExceptionMessage;
 import com.gts.godtingDev.config.oauth2.provider.OAuth2GoogleSet;
 import com.gts.godtingDev.config.oauth2.provider.OAuth2KakaoSet;
 import com.gts.godtingDev.config.oauth2.provider.OAuth2UserSet;
@@ -51,8 +53,7 @@ public class PrincipalOAuth2UserService extends DefaultOAuth2UserService {
         } else if (flatForm.equals("google")) {
             return new OAuth2GoogleSet(oAuth2User.getAttributes());
         } else {
-            // throw new CustomException(ExceptionMessage.OAUTH2_PROVIDER_NOT_FOUND);
-            return null;
+            throw new CustomException(ExceptionMessage.OAUTH2_PROVIDER_NOT_FOUND);
         }
     }
 
