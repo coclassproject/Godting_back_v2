@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js")
                 .permitAll()
-                .antMatchers("/", "/auth/kakao", "/auth/naver", "/auth/google") // 필요시 수정
+                .antMatchers("/*", "/**") // 필요시 수정
                 .permitAll()
                 .anyRequest()
                 .authenticated()
