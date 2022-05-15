@@ -29,20 +29,23 @@ public class User {
 
     private String region;
 
-    private int height;
+    private Integer height;
 
-    private int studentNum;
+    private Integer studentNum;
 
-    private int age;
+    private Integer age;
 
     private String lecture;
 
     private String interest;
 
+    @Column
     private boolean smoking;
 
+    @Column
     private boolean drinking;
 
+    @Column
     private boolean duty;
 
     @OneToMany(mappedBy = "user")

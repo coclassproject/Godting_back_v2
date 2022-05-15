@@ -16,10 +16,11 @@ public enum ExceptionMessage{
     MISMATCH_REFRESH_TOKEN(BAD_REQUEST, "리프레시 토큰 정보가 일치하지 않습니다."),
     FILE_UPLOAD_FAILED(BAD_REQUEST, "파일 업로드에 실패하였습니다."),
     NOT_SUPPORTED_LOGIN_PROCESS(BAD_REQUEST, "지원하지 않는 로그인 형식입니다."),
+    AUTHORIZATION_FAILED(BAD_REQUEST, "인증에 실패하였습니다."),
 
     // 401 UNAUTHORIZED
     INVALID_AUTH_TOKEN(UNAUTHORIZED, "권한 정보가 없는 토큰입니다"),
-    UNAUTHORIZED_MEMBER(UNAUTHORIZED, "현재 내 계정 정보가 존재하지 않습니다"),
+    UNAUTHORIZED_MEMBER(UNAUTHORIZED, "계정 정보가 존재하지 않습니다"),
     UNAUTHORIZED_CHAT(UNAUTHORIZED, "채팅 권한이 없는 대상입니다."),
     UNAUTHORIZED_EMAIL(UNAUTHORIZED, "이메일 인증이 진행되지 않았습니다."),
 
@@ -28,8 +29,7 @@ public enum ExceptionMessage{
     REFRESH_TOKEN_NOT_FOUND(NOT_FOUND, "로그아웃 된 사용자입니다."),
     CHAT_NOT_FOUND(NOT_FOUND, "채팅 대상을 찾을 수 없습니다."),
 
-    // 404 NOT_FOUND, OAuth2 Provider Error
-    OAUTH2_PROVIDER_NOT_FOUND(NOT_FOUND, "잘못된 프로바이더 입니다."),
+    // 404 NOT_FOUND
     // 수정 필요할 수 있는 코드, 메일 인증 요청시간 초과로 임시 설정함.
     MAIL_AUTHORIZED_CODE_NOT_FOUND(NOT_FOUND, "메일 인증코드를 찾을 수 없습니다."),
     URL_NOT_MATCHED(NOT_FOUND, "잘못된 URL 주소입니다."),

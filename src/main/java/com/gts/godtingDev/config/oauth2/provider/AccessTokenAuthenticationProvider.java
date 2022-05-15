@@ -30,7 +30,6 @@ public class AccessTokenAuthenticationProvider implements AuthenticationProvider
 
         OAuth2UserDetails oAuth2User = loadUserService.getOAuth2UserDetails((AccessTokenSocialTypeToken) authentication);
 
-
         User user = saveOrGet(oAuth2User);
         oAuth2User.setRoles(user.getRole().name());
 

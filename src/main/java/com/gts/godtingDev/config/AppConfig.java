@@ -22,9 +22,4 @@ public class AppConfig {
         return modelMapper;
     }
 
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-
 }

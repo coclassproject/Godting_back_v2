@@ -10,8 +10,6 @@ import java.util.Map;
 
 public class KakaoLoadStrategy extends SocialLoadStrategy{
 
-
-
     protected String sendRequestToSocialSite(HttpEntity request){
         try {
             ResponseEntity<Map<String, Object>> response = restTemplate.exchange(SocialType.KAKAO.getUserInfoUrl(),// -> /v2/user/me

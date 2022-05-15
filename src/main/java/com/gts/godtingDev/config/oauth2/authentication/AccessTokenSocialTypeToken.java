@@ -14,8 +14,6 @@ public class AccessTokenSocialTypeToken extends AbstractAuthenticationToken {
     private String accessToken;
     private SocialType socialType;
 
-
-
     public AccessTokenSocialTypeToken(String accessToken, SocialType socialType) {
         super(null);
         this.accessToken = accessToken;
@@ -23,16 +21,12 @@ public class AccessTokenSocialTypeToken extends AbstractAuthenticationToken {
         setAuthenticated(false);
     }
 
-
     @Builder
     public AccessTokenSocialTypeToken(Object principal, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;
         super.setAuthenticated(true);
     }
-
-
-
 
     public String getAccessToken() {
         return accessToken;
@@ -47,12 +41,9 @@ public class AccessTokenSocialTypeToken extends AbstractAuthenticationToken {
         return this.principal;
     }
 
-
-
     @Override
     public Object getCredentials() {
         return null;
     }
-
 
 }

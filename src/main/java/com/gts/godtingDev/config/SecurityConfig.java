@@ -23,9 +23,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/login/oauth2/*")
+                .antMatchers("/login/oauth2/**")
                     .permitAll()
-                .anyRequest().hasRole("USER");
+                .anyRequest().permitAll();
 
         http.addFilterBefore(oAuth2AccessTokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
