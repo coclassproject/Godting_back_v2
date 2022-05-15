@@ -1,4 +1,4 @@
-package com.gts.godtingDev.redis;
+package com.gts.godtingDev.config.redis;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

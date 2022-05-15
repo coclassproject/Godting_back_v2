@@ -1,6 +1,8 @@
 package com.gts.godtingDev.user;
 
 import com.gts.godtingDev.profile.Profile;
+import com.gts.godtingDev.user.oauth2.Role;
+import com.gts.godtingDev.user.oauth2.SocialType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,7 +12,8 @@ import java.util.Set;
 
 @Entity
 @Builder @Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -46,7 +49,13 @@ public class User {
     private Set<Profile> profiles = new HashSet<>();
 
     @Column(unique = true)
-    private String OAuth2Id;
+    private String socialId;
+
+    @Enumerated(EnumType.STRING)
+    private SocialType socialType;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Column(unique = true)
     private String email;

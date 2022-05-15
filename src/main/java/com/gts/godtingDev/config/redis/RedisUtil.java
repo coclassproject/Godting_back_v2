@@ -1,4 +1,4 @@
-package com.gts.godtingDev.redis;
+package com.gts.godtingDev.config.redis;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;

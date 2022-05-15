@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.gts'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = "14"
 
 repositories {
 	mavenCentral()
@@ -39,3 +39,4 @@ tasks.named('test') {
 jar {
 	enabled = false
 }
+targetCompatibility = JavaVersion.VERSION_14
