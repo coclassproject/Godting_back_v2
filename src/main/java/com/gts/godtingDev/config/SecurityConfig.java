@@ -1,6 +1,8 @@
 package com.gts.godtingDev.config;
 
 import com.gts.godtingDev.config.oauth2.filter.OAuth2AccessTokenAuthenticationFilter;
+import com.gts.godtingDev.config.oauth2.handler.OAuth2AuthenticationFailureHandler;
+import com.gts.godtingDev.config.oauth2.handler.OAuth2AuthenticationSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +20,8 @@ import java.util.Arrays;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final OAuth2AccessTokenAuthenticationFilter oAuth2AccessTokenAuthenticationFilter;
+    private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+    private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -25,7 +29,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login/oauth2/**")
                     .permitAll()
-                .anyRequest().permitAll();
+                .anyRequest().hasRole("ROLE_USER")
+                .and()
+                .oauth2Login()
+                .successHandler(oAuth2AuthenticationSuccessHandler)
+                .failureHandler(oAuth2AuthenticationFailureHandler);
 
         http.addFilterBefore(oAuth2AccessTokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
