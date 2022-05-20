@@ -33,6 +33,10 @@ public class AccessTokenAuthenticationProvider implements AuthenticationProvider
         User user = saveOrGet(oAuth2User);
         oAuth2User.setRoles(user.getRole().name());
 
+        if (user.getEmail() != null) {
+            oAuth2User.setUsername(user.getEmail());
+        }
+
         return AccessTokenSocialTypeToken.builder().principal(oAuth2User).authorities(oAuth2User.getAuthorities()).build();
     }
 

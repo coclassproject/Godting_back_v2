@@ -1,5 +1,6 @@
 package com.gts.godtingDev.user.form;
 
+import com.gts.godtingDev.user.oauth2.SocialType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,6 +41,8 @@ public class SignUpForm {
     private boolean drinking;
 
     private boolean duty;
+
+    private SocialType socialType;
 
     private String socialId;
 

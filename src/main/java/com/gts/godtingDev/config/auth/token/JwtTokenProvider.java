@@ -2,19 +2,25 @@ package com.gts.godtingDev.config.auth.token;
 
 import com.gts.godtingDev.config.exception.CustomException;
 import com.gts.godtingDev.config.exception.ExceptionMessage;
+import com.gts.godtingDev.config.oauth2.OAuth2UserDetailsService;
+import com.gts.godtingDev.config.oauth2.authentication.AccessTokenSocialTypeToken;
 import com.gts.godtingDev.config.oauth2.authentication.OAuth2UserDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 @Service
+@RequiredArgsConstructor
 public class JwtTokenProvider {
 
     @Value("${spring.jwt.secret}")
@@ -22,11 +28,13 @@ public class JwtTokenProvider {
 
     private long accessTokenValidTime = 1000L * 60L * 60L; // 1시간
     private long refreshTokenValidTime = 1000L * 60L * 60L * 24L * 30L; // 30일(1달)
+    private final OAuth2UserDetailsService oAuth2UserDetailsService;
 
     public String createToken(Authentication authentication, Long tokenValidTime) {
         OAuth2UserDetails principal = (OAuth2UserDetails) authentication.getPrincipal();
-        Claims claims = Jwts.claims().setSubject(principal.getSocialId());
+        Claims claims = Jwts.claims().setSubject(principal.getUsername());
         claims.put("socialType", principal.getSocialType());
+        claims.put("socialId", principal.getSocialId());
 
         Date date = new Date();
 
@@ -62,16 +70,22 @@ public class JwtTokenProvider {
         }
     }
 
-    public String resolveToken(HttpServletRequest request, String tokenName) {
+    public String resolveToken(HttpServletRequest request) {
         return request.getHeader("Authorization");
     }
 
-    public String getUserSocialId(String token) {
+    public String getUserEmail(String token) {
         return Jwts.parser()
                 .setSigningKey(secretKey)
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
     }
+
+    public Authentication getAuthentication(String token) {
+        OAuth2UserDetails oAuth2UserDetails = (OAuth2UserDetails) oAuth2UserDetailsService.loadUserByUsername(this.getUserEmail(token));
+        return new AccessTokenSocialTypeToken(token, oAuth2UserDetails.getSocialType());
+    }
+
 
 }

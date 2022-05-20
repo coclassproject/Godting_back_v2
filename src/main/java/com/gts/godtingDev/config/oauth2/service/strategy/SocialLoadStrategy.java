@@ -35,7 +35,6 @@ public abstract class SocialLoadStrategy {
     protected abstract String sendRequestToSocialSite(HttpEntity request);
 
 
-
     public void setHeaders(String accessToken, HttpHeaders headers) {
         headers.set("Authorization", "Bearer " + accessToken);
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);

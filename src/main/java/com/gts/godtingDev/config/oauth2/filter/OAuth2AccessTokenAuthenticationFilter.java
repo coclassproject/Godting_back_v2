@@ -50,7 +50,7 @@ public class OAuth2AccessTokenAuthenticationFilter extends AbstractAuthenticatio
         SocialType socialType = extractSocialType(request);
 
         String accessToken = request.getHeader(ACCESS_TOKEN_HEADER_NAME);
-        log.info("{}", socialType.getSocialName());
+        log.info("{} Authentication 진행중", socialType.getSocialName());
 
         return this.getAuthenticationManager().authenticate(new AccessTokenSocialTypeToken(accessToken, socialType));
     }

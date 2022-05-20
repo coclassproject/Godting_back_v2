@@ -14,7 +14,7 @@ public class CookieConfig {
     public Cookie addCookie(String name, String value) {
         Cookie cookie = new Cookie(name, value);
         cookie.setHttpOnly(true);
-        cookie.setPath("/authentication");
+        cookie.setPath("/");
         cookie.setSecure(true);
         cookie.setMaxAge(Long.valueOf(cookieValidTime).intValue());
         return cookie;
@@ -41,7 +41,7 @@ public class CookieConfig {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals(name)) {
                     cookie.setValue("");
-                    cookie.setPath("/authentication");
+                    cookie.setPath("/");
                     cookie.setMaxAge(0);
                     response.addCookie(cookie);
                 }
