@@ -17,6 +17,7 @@ public enum ExceptionMessage{
     FILE_UPLOAD_FAILED(BAD_REQUEST, "파일 업로드에 실패하였습니다."),
     NOT_SUPPORTED_LOGIN_PROCESS(BAD_REQUEST, "지원하지 않는 로그인 형식입니다."),
     AUTHORIZATION_FAILED(BAD_REQUEST, "인증에 실패하였습니다."),
+    CANNOT_USE_DOMAIN(BAD_REQUEST, "등록되지 않은 도메인입니다."),
 
     // 401 UNAUTHORIZED
     INVALID_AUTH_TOKEN(UNAUTHORIZED, "권한 정보가 없는 토큰입니다"),

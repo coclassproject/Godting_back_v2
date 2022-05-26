@@ -62,11 +62,22 @@ public class UserService {
 
     public void sendEmail(String email) {
         boolean emailCheck = userRepository.existsByEmail(email);
-        // TODO : 학교 웹메일 필터
+
+        // 자바 기반 웹메일 필터
+        int index = email.indexOf("@");
+        String domain = email.substring(index + 1);
+        if (!(domain.equals("bu.ac.kr"))) {
+            throw new CustomException(ExceptionMessage.CANNOT_USE_DOMAIN);
+        }
+        // 이메일 중복여부
         if (emailCheck) {
             throw new CustomException(ExceptionMessage.REDUPLICATION_EMAIL);
         }
+
+        // 이메일 토큰생성(랜덤)
         String emailCheckToken = UUID.randomUUID().toString();
+
+        // 랜덤 토큰 생성 후 Redis에 담고 가져오기
         String socialId = (String)redisUtil.get(emailCheckToken);
         if (socialId != null) {
             redisUtil.delete(emailCheckToken);
@@ -74,7 +85,7 @@ public class UserService {
         redisUtil.set(emailCheckToken, email, 10);
         EmailMessage emailMessage = EmailMessage.builder()
                 .to(email)
-                .subject("Godting, 회원가입 이메일 인증")
+                .subject("Godting 회원가입 이메일 인증")
                 .message("인증 번호 박스에" + emailCheckToken + "을 입력하세요.").build();
         mailService.sendMail(emailMessage);
     }

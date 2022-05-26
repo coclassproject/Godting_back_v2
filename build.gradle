@@ -39,4 +39,3 @@ tasks.named('test') {
 jar {
 	enabled = false
 }
-targetCompatibility = JavaVersion.VERSION_14

@@ -35,7 +35,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login/oauth2/**")
                     .permitAll()
-                .anyRequest().hasRole("USER")
+                .antMatchers("/",
+                        "/error",
+                        "/favicon.ico",
+                        "/**/*.png",
+                        "/**/*.gif",
+                        "/**/*.svg",
+                        "/**/*.jpg",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js")
+                .permitAll()
+                .anyRequest().permitAll()
                 .and()
                 .oauth2Login()
                 .successHandler(oAuth2AuthenticationSuccessHandler)
